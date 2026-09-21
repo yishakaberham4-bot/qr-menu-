@@ -5,11 +5,25 @@ import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import AdminClient from './AdminClient'
 
+type Category = {
+  id: string
+  name: string
+  sort_order: number
+  [key: string]: any
+}
+
+type MenuItem = {
+  id: string
+  name: string
+  sort_order: number
+  [key: string]: any
+}
+
 export default function AdminPage() {
   const [loading, setLoading] = useState(true)
-  const [categories, setCategories] = useState([])
-  const [items, setItems] = useState([])
-  const [username, setUsername] = useState('')
+  const [categories, setCategories] = useState<Category[]>([])
+  const [items, setItems] = useState<MenuItem[]>([])
+  const [username, setUsername] = useState('A')
   const router = useRouter()
   const supabase = createClient()
 
@@ -33,13 +47,13 @@ export default function AdminPage() {
         .select('*')
         .order('sort_order')
 
-      setCategories(cats || [])
-      setItems(menuItems || [])
+      setCategories((cats as Category[]) || [])
+      setItems((menuItems as MenuItem[]) || [])
       setLoading(false)
     }
 
     loadData()
-  }, [])
+  }, [router, supabase])
 
   if (loading) {
     return (
@@ -59,7 +73,6 @@ export default function AdminPage() {
           </a>
 
           <div className="flex items-center gap-5">
-            {/* Restaurant Profile */}
             <a
               href="/admin/restaurant"
               className="text-sm font-medium text-gray-700 hover:text-black transition"
@@ -67,7 +80,6 @@ export default function AdminPage() {
               Restaurant Profile
             </a>
 
-            {/* QR Code */}
             <a
               href="/admin/qr"
               className="text-sm font-medium text-gray-700 hover:text-black transition"
@@ -75,7 +87,6 @@ export default function AdminPage() {
               QR Code
             </a>
 
-            {/* Logout */}
             <button
               onClick={() => {
                 localStorage.removeItem('admin_logged_in')
@@ -87,7 +98,6 @@ export default function AdminPage() {
               Logout
             </button>
 
-            {/* Circular Profile Button */}
             <a
               href="/admin/profile"
               className="w-11 h-11 rounded-full bg-gradient-to-br from-purple-600 to-indigo-700 text-white flex items-center justify-center font-bold text-lg shadow-md hover:scale-105 transition"
