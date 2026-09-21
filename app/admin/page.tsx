@@ -8,15 +8,20 @@ import AdminClient from './AdminClient'
 type Category = {
   id: string
   name: string
+  name_am: string | null
   sort_order: number
-  [key: string]: any
 }
 
 type MenuItem = {
   id: string
+  category_id: string
   name: string
-  sort_order: number
-  [key: string]: any
+  name_am: string | null
+  description: string | null
+  description_am: string | null
+  price: number
+  available: boolean
+  image_url: string | null
 }
 
 export default function AdminPage() {
