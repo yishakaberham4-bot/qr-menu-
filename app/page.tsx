@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import MenuClient from './MenuClient'
 
@@ -38,6 +39,30 @@ export default async function MenuPage() {
       />
 
       <div className="relative max-w-5xl mx-auto px-4 py-12">
+        {/* Head Office Button */}
+        <div className="flex justify-end mb-4">
+          <Link
+            href="/admin/login"
+            className="flex items-center gap-2 bg-[#3d2b1f] hover:bg-[#2a1d15] text-[#f8f1e9] px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all shadow-md active:scale-95 z-10"
+          >
+            <svg
+              className="w-4 h-4 text-[#c9a86c]"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0h4m-4 0V11m0 5h4"
+              />
+            </svg>
+            <span>Head Office</span>
+          </Link>
+        </div>
+
         {/* Header with Restaurant Info */}
         <div className="text-center mb-10">
           {/* Logo */}

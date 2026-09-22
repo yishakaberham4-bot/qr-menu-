@@ -17,11 +17,9 @@ export default function QRCodePage() {
       return
     }
 
-    // Automatically use the current website URL
-    if (typeof window !== 'undefined') {
-      setMenuUrl(window.location.origin)
-    }
-  }, [])
+    // Set default menu URL to your live Vercel domain
+    setMenuUrl('https://qr-menu-rih5.vercel.app/')
+  }, [router])
 
   function downloadQR() {
     const canvas = canvasRef.current?.querySelector('canvas')
@@ -61,7 +59,7 @@ export default function QRCodePage() {
               value={menuUrl}
               onChange={(e) => setMenuUrl(e.target.value)}
               className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-black outline-none"
-              placeholder="https://your-menu.netlify.app"
+              placeholder="https://qr-menu-rih5.vercel.app/"
             />
             <p className="text-xs text-gray-400 mt-2">
               This is the link customers will open when they scan the QR code
