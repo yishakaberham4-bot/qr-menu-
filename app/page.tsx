@@ -107,11 +107,16 @@ export default async function MenuPage() {
         <MenuClient categories={categories || []} items={items || []} />
       </div>
 
-      {/* Floating Pay Button */}
+      {/* Floating Powered by Union Button */}
       <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
-        <button className="bg-[#7a1f1f] hover:bg-[#5c1717] text-white px-10 py-4 rounded-full font-medium shadow-xl transition">
-          Pay your bill
-        </button>
+        <a
+          href="https://t.me/Yisetech"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-[#7a1f1f] hover:bg-[#5c1717] text-white px-5 py-2.5 rounded-full text-sm font-medium shadow-lg transition inline-block"
+        >
+          Powered by Union
+        </a>
       </div>
     </div>
   )
