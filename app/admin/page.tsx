@@ -32,7 +32,6 @@ export default function AdminPage() {
   const [items, setItems] = useState<MenuItem[]>([])
   const [username, setUsername] = useState('A')
   const router = useRouter()
-  const supabase = createClient()
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('admin_logged_in')
@@ -42,6 +41,9 @@ export default function AdminPage() {
     }
 
     setUsername(localStorage.getItem('admin_username') || 'A')
+
+    // Create the client only in the browser (avoids build-time crash)
+    const supabase = createClient()
 
     async function loadData() {
       const { data: cats } = await supabase
@@ -60,7 +62,7 @@ export default function AdminPage() {
     }
 
     loadData()
-  }, [router, supabase])
+  }, [router])
 
   if (loading) {
     return (

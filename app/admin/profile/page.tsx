@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation'
 
 export default function AdminProfilePage() {
   const router = useRouter()
-  const supabase = createClient()
 
   const [username, setUsername] = useState('')
   const [currentPassword, setCurrentPassword] = useState('')
@@ -27,7 +26,7 @@ export default function AdminProfilePage() {
       return
     }
     setUsername(localStorage.getItem('admin_username') || '')
-  }, [])
+  }, [router])
 
   async function handleChangePassword(e: React.FormEvent) {
     e.preventDefault()
@@ -45,6 +44,8 @@ export default function AdminProfilePage() {
       setPasswordLoading(false)
       return
     }
+
+    const supabase = createClient()
 
     const { data: user } = await supabase
       .from('admin_users')
@@ -85,6 +86,8 @@ export default function AdminProfilePage() {
       setUserLoading(false)
       return
     }
+
+    const supabase = createClient()
 
     const { error } = await supabase.from('admin_users').insert({
       username: newUsername,

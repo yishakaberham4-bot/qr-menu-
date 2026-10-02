@@ -6,7 +6,6 @@ import { createClient } from '@/lib/supabase/client'
 
 export default function RestaurantProfilePage() {
   const router = useRouter()
-  const supabase = createClient()
 
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -26,6 +25,8 @@ export default function RestaurantProfilePage() {
       return
     }
 
+    const supabase = createClient()
+
     async function loadSettings() {
       const { data } = await supabase
         .from('restaurant_settings')
@@ -44,7 +45,7 @@ export default function RestaurantProfilePage() {
     }
 
     loadSettings()
-  }, [])
+  }, [router])
 
   function handleLogoChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
@@ -55,6 +56,7 @@ export default function RestaurantProfilePage() {
   }
 
   async function uploadLogo(file: File): Promise<string | null> {
+    const supabase = createClient()
     const fileExt = file.name.split('.').pop()
     const fileName = `logo-${Date.now()}.${fileExt}`
 
@@ -78,6 +80,8 @@ export default function RestaurantProfilePage() {
     e.preventDefault()
     setSaving(true)
     setMessage('')
+
+    const supabase = createClient()
 
     let logoUrl = logoPreview
 

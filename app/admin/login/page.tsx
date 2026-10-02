@@ -10,12 +10,13 @@ export default function AdminLogin() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
-  const supabase = createClient()
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault()
     setLoading(true)
     setError('')
+
+    const supabase = createClient()
 
     const { data, error } = await supabase
       .from('admin_users')
